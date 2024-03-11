@@ -194,6 +194,7 @@ a {
 }
 
 .footer{
+
 	width:100%;
 	height:auto;
 	background-color: #004029;
@@ -250,4 +251,13 @@ a {
 	color: #fff;
 	font-size:18px;
 	justify-content: center;
+}
+
+.text{
+	margin: 0px 40px;
+}
+
+.contact_table{
+	margin: 20px 40px;
+	border-color: #008354;
 }
