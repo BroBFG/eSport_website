@@ -8,7 +8,7 @@ namespace eSport_website.Db.Models
     {
         [Key]
         public int Id { get; set; }
-        public DateOnly Date { get; set; }
+        public DateTime Date { get; set; }
         public string? Enemy { get; set; }
 
         [JsonIgnore]

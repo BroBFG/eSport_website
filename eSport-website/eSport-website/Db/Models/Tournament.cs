@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace eSport_website.Db.Models
 {
@@ -11,7 +12,9 @@ namespace eSport_website.Db.Models
         public int? Place { get; set; }
         public List<Match>? Matches { get; set; } // Матчи турнира
 
+        [JsonIgnore]
         public int DisciplineId { get; set; } //Внеш ключ на дисциплину
+        [JsonIgnore]
         public Discipline? Discipline { get; set; } // Навигационное свойство
     }
 }
