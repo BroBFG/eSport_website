@@ -18,12 +18,12 @@ namespace eSport_website.Controllers
         [HttpGet]
         public Task<List<Tournament>> GetAsync()
         {
-            return db.Tournaments.ToListAsync();
+            return db.Tournaments.AsNoTracking().Include(p => p.Matches).ToListAsync();
         }
         [HttpPost]
         public void Post()
         {
-            /* Discipline discipline = new Discipline() { Name = "CS", Icon_name = "cs.png" };
+            Discipline discipline = new Discipline() { Name = "CS", Icon_name = "cs.png" };
              Tournament a = new Tournament() { Name = "IEM Colone", Discipline = discipline };
              Match m1 = new Match() { Date = new DateTime(2023, 11, 01), Enemy = "TeamLiquid", Tournament = a };
              Match m2 = new Match() { Date = new DateTime(2023, 11, 02), Enemy = "NaVi", Tournament = a };
@@ -32,7 +32,7 @@ namespace eSport_website.Controllers
              db.Disciplines.Add(discipline);
              db.Tournaments.Add(a);
              db.AddRange(m1, m2, m3);
-             db.SaveChanges();*/
+             db.SaveChanges();
 
         }
     }

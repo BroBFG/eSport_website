@@ -10,8 +10,9 @@ namespace eSport_website.Db.Models
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public string? Enemy { get; set; }
+        public bool IsFinished { get; set; }
 
-        [JsonIgnore]
+        
         public int TournamentId { get; set; } //Внеш ключ на турнир
         [JsonIgnore]
         public Tournament? Tournament { get; set; } //Навигационное свойство 
