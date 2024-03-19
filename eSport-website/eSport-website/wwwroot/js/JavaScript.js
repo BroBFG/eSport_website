@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = JSON.parse(request.responseText);
             data.forEach(match => {
                 const date = match.date;
-                const nameTournament = match.tournamentId;
+                const nameTournament = match.nameTournament;
                 const enemy = match.enemy;
                 generateHTML(date, nameTournament, enemy);
             });
