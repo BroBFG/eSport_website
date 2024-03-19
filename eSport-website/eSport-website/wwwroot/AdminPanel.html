@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/Adminpanel.css">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+	<script src="js/adminpanel.js" defer></script>
+	<title>AdminPanel</title>
+</head>
+<body>
+	<header class="navigation">
+		<nav class="menu">
+			<a href="/" class="logo"><img src="/img/logo.svg"></a>	
+			<div class="menutext">Admin Panel</div>
+		</nav>
+	</header>
+	<section class="main">
+		<div class="choosepanel">
+			<div id="buttonAddMatch" class="button">Добавить матч</div>
+			<div id="buttonAddTournament" class="button">Добавить турнир</div>
+			<div class="button">Изменить турнир</div>
+		</div>
+		<div id="mainmenu" class="contentmenu" style="display:flex; justify-content:center; align-items:center;">
+			<h1 class="form">Выберите нужный вам пункт меню</h1>
+		</div>
+		<div id="addMatchMenu" class="contentmenu" style="display: none">
+			<h2 class="form">Заполните информацию о матче</h2>
+			<form id="matchForm" class="form">
+				<label for="matchDate">Дата матча:</label>
+				<input type="date" id="matchDate" name="matchDate"><br><br>
+
+				<label for="tournament">Турнир:</label>
+				<select id="tournament" name="tournament"></select><br><br>
+
+				<label for="opponent">Противник:</label>
+				<input type="text" id="opponent" name="opponent"><br><br>
+
+				<button type="button" onclick="submitAddMatchForm()">Отправить</button>
+			</form>
+		</div>
+		<div id="addTournamentMenu" class="contentmenu" style="display: none;">
+			<h2 class="form">Заполните информацию о турнире</h2>
+			<form id="matchForm" class="form">
+				<label for="startTournamentDate">Дата начала турнира:</label>
+				<input type="date" id="startTournamentDate" name="startTournamentDate"><br><br>
+
+				<label for="endTournamentDate">Дата конца турнира:</label>
+				<input type="date" id="endTournamentDate" name="endTournamentDate"><br><br>
+
+				<label for="name">Название турнира:</label>
+				<input type="text" id="name" name="name"><br><br>
+
+				<p>Если турнир завершен, то следует заполнить эти поля:</p>
+
+				<label for="place">Место:</label>
+				<input type="text" id="place" name="place"><br><br>
+
+				<label for="prize">Призовые:</label>
+				<input type="text" id="prize" name="prize"><br><br>
+
+				<button type="button" onclick="submitAddTournamentForm()">Отправить</button>
+			</form>
+		</div>
+		<div class="contentmenu" style="display: none;">
+
+		</div>
+	</section>
+</body>
+</html>

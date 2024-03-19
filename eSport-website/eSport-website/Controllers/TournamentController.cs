@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace eSport_website.Controllers
 {
@@ -10,15 +11,18 @@ namespace eSport_website.Controllers
     public class TournamentController : ControllerBase
     {
         private readonly ProjectContext db;
-        public TournamentController(ProjectContext context)
+        ILogger logger;
+        public TournamentController(ProjectContext context, ILogger<TournamentController> logger)
         {
             db = context;
+            this.logger = logger;
         }
 
         [HttpGet]
-        public Task<List<Tournament>> GetAsync()
+        public async Task<List<Tournament>> GetAsync()
         {
-            return db.Tournaments.AsNoTracking().Include(p => p.Matches).ToListAsync();
+            logger.LogInformation("visited Get api/Tournament at {0}", DateTime.Now);
+            return await db.Tournaments.AsNoTracking().ToListAsync();
         }
         [HttpPost]
         public void Post()
