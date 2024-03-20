@@ -1,4 +1,5 @@
 ﻿using eSport_website.Db.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +25,20 @@ namespace eSport_website.Controllers
             logger.LogInformation("visited Get api/Tournament at {0}", DateTime.Now);
             return await db.Tournaments.AsNoTracking().ToListAsync();
         }
+
+        [HttpGet("{id}")]
+        public  IQueryable GetAsync(int id)
+        {
+            logger.LogInformation("visited Get id api/Tournament at {0}", DateTime.Now);
+            if(id <= db.Tournaments.Count())
+                return db.Tournaments.AsNoTracking().OrderByDescending(p => p.StartDate).Take(id);
+            else
+                return db.Tournaments.AsNoTracking().OrderByDescending(p => p.StartDate).Take(db.Tournaments.Count());
+        }
+
+        [Authorize]
         [HttpPost]
-        public async Task<IResult> PostAsync(Tournament tournament)
+        public async Task<IResult> PostAsync([FromBody]Tournament tournament)
         {
             logger.LogInformation("visited Post api/Tournament at {0}", DateTime.Now);
             try
@@ -41,12 +54,12 @@ namespace eSport_website.Controllers
                 return Results.BadRequest();
             }
         }
-
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IResult> PutAsync(int id, [FromBody] Tournament tournament)
         {
             logger.LogInformation("visited Put api/Tournament at {0}", DateTime.Now);
-            Tournament? tournamentupdate = await db.Tournaments.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+            var tournamentupdate = await db.Tournaments.FirstOrDefaultAsync(p => p.Id == id);
             if (tournamentupdate != null)
             {
                 tournamentupdate.StartDate = tournament.StartDate;

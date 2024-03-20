@@ -8,6 +8,7 @@ namespace eSport_website
         public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<Discipline> Disciplines { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public ProjectContext(DbContextOptions<ProjectContext> options):base(options)
         {;

@@ -2,34 +2,38 @@
     display: flex;
 }
 
-.choosepanel{
+.choosepanel {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 200px;
-    height: 250px;
+    height: 300px;
     margin: 20px 40px;
-    border: solid 1px;
+    border: #000000 solid 1px;
+    color: #ffffff;
+    background-color: #008354;
 }
 
-.button{
+.button {
     width: 160px;
     height: 50px;
-    border: solid 1px;
+    border: #000000 solid 1px;
     margin: 10px 10px;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    background-color: #004029;
 }
 
-.contentmenu{
+.contentmenu {
     width: 70%;
     height: auto;
-    border:solid 1px;
+    border: #000000 solid 1px;
     margin: 20px 40px;
-
+    color: #ffffff;
+    background-color: #008354;
 }
 
 .form{

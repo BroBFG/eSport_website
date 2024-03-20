@@ -24,7 +24,7 @@ namespace eSport_website.Controllers
         [HttpPost]
         public Task PostAsync(Discipline discipline)
         {
-            db.Add(discipline);
+            db.Disciplines.Add(discipline);
             db.SaveChanges();
             return Task.CompletedTask;
         }

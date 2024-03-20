@@ -21,6 +21,7 @@
 			<div id="buttonAddMatch" class="button">Добавить матч</div>
 			<div id="buttonAddTournament" class="button">Добавить турнир</div>
 			<div id="buttonChangeTournament" class="button">Изменить турнир</div>
+			<div id="buttonChangeUser" class="button">Изменить параметры входа</div>
 		</div>
 		<div id="mainmenu" class="contentmenu" style="display:flex; justify-content:center; align-items:center;">
 			<h1 class="form">Выберите нужный вам пункт меню</h1>
@@ -42,7 +43,15 @@
 		</div>
 		<div id="addTournamentMenu" class="contentmenu" style="display: none;">
 			<h2 class="form">Заполните информацию о турнире</h2>
+			<form id="changeTourForm" class="form" style="display: none">
+				<label for="tourList">Выберите турнир для редактуры:</label>
+				<select id="tourList" name="tourList"></select>
+				<button type="button" onclick="downloadTournamentForm()">Загрузить</button>
+				<br><br>
+			</form>
 			<form id="tourForm" class="form">
+
+
 				<label for="discipline">Дисциплина:</label>
 				<select id="discipline" name="discipline"></select><br><br>
 
@@ -63,7 +72,20 @@
 				<label for="prize">Призовые:</label>
 				<input type="text" id="prize" name="prize"><br><br>
 
-				<button type="button" onclick="submitAddTournamentForm()">Отправить</button>
+				<button id="buttonAddTournamentForm" type="button" onclick="submitAddTournamentForm()">Отправить</button>
+				<button id="buttonChangeTournamentForm" type="button" style="display:none" onclick="submitChangeTournamentForm()">Изменить</button>
+			</form>
+		</div>
+		<div id="changeUser" class="contentmenu" style="display: none">
+			<h2 class="form">Заполните информацию о матче</h2>
+			<form id="changeUserForm" class="form">
+				<label for="nickname">Имя пользователя:</label>
+				<input type="text" id="nickname" name="nickname"><br><br>
+
+				<label for="password">Пароль:</label>
+				<input type="text" id="password" name="password"><br><br>
+
+				<button type="button" onclick="submitChangeUser()">Изменить</button>
 			</form>
 		</div>
 

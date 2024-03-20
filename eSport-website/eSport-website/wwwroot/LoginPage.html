@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>AdminPanel:Login page</title>
+	<script src="js/loginpage.js" defer></script>
 	<link rel="stylesheet" type="text/css" href="/css/styleLoginPage.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -14,12 +15,12 @@
 			<div class="blockname">Авторизация</div>
 			<div class="blockfield">
 			Логин:<br>
-			<form><input type="text" id="login" class="inputstyle"></form>
+			<form><input type="text" id="nickname" class="inputstyle"></form>
 			<br>
 			Пароль:<br>
 			<form><input type="text" id="password" class="inputstyle"></form>
 			</div>
-			<div class="blockbutton"><input type="submit" class="buttonstyle" value="Вход"></div>
+			<div class="blockbutton"><input id="submitLogin" type="submit" class="buttonstyle" value="Вход"></div>
 		</div>
 	</div>
 </body>
