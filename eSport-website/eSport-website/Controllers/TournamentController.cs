@@ -25,19 +25,54 @@ namespace eSport_website.Controllers
             return await db.Tournaments.AsNoTracking().ToListAsync();
         }
         [HttpPost]
-        public void Post()
+        public async Task<IResult> PostAsync(Tournament tournament)
         {
-            Discipline discipline = new Discipline() { Name = "CS", Icon_name = "cs.png" };
-             Tournament a = new Tournament() { Name = "IEM Colone", Discipline = discipline };
-             Match m1 = new Match() { Date = new DateTime(2023, 11, 01), Enemy = "TeamLiquid", Tournament = a };
-             Match m2 = new Match() { Date = new DateTime(2023, 11, 02), Enemy = "NaVi", Tournament = a };
-             Match m3 = new Match() { Date = new DateTime(2023, 11, 03), Enemy = "VP", Tournament = a };
+            logger.LogInformation("visited Post api/Tournament at {0}", DateTime.Now);
+            try
+            {
+                await db.Tournaments.AddAsync(tournament);
+                await db.SaveChangesAsync();
+                logger.LogInformation("finished Post api/Tournament at {0} result: Ok", DateTime.Now);
+                return Results.Ok();
+            }
+            catch
+            {
+                logger.LogInformation("finished Put api/Tournament at {0} result: Bad request", DateTime.Now);
+                return Results.BadRequest();
+            }
+        }
 
-             db.Disciplines.Add(discipline);
-             db.Tournaments.Add(a);
-             db.AddRange(m1, m2, m3);
-             db.SaveChanges();
+        [HttpPut("{id}")]
+        public async Task<IResult> PutAsync(int id, [FromBody] Tournament tournament)
+        {
+            logger.LogInformation("visited Put api/Tournament at {0}", DateTime.Now);
+            Tournament? tournamentupdate = await db.Tournaments.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+            if (tournamentupdate != null)
+            {
+                tournamentupdate.StartDate = tournament.StartDate;
+                tournamentupdate.EndDate = tournament.EndDate;
+                tournamentupdate.Prize = tournament.Prize;
+                tournamentupdate.Place = tournament.Place;
+                tournamentupdate.Name = tournament.Name;
+                try
+                {
+                    await db.SaveChangesAsync();
+                    logger.LogInformation("finished Put api/Tournament at {0} result: Ok", DateTime.Now);
+                    return Results.Ok();
+                }
+                catch
+                {
+                    logger.LogInformation("finished Put api/Tournament at {0} result: Exception", DateTime.Now);
+                    return Results.BadRequest();
+                }
+            }
+            else
+            {
+                logger.LogInformation("finished Put api/Tournament at {0} result: Bad request", DateTime.Now);
+                return Results.BadRequest();
+            }
 
         }
+
     }
 }

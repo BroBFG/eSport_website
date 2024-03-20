@@ -20,7 +20,7 @@
 		<div class="choosepanel">
 			<div id="buttonAddMatch" class="button">Добавить матч</div>
 			<div id="buttonAddTournament" class="button">Добавить турнир</div>
-			<div class="button">Изменить турнир</div>
+			<div id="buttonChangeTournament" class="button">Изменить турнир</div>
 		</div>
 		<div id="mainmenu" class="contentmenu" style="display:flex; justify-content:center; align-items:center;">
 			<h1 class="form">Выберите нужный вам пункт меню</h1>
@@ -42,7 +42,10 @@
 		</div>
 		<div id="addTournamentMenu" class="contentmenu" style="display: none;">
 			<h2 class="form">Заполните информацию о турнире</h2>
-			<form id="matchForm" class="form">
+			<form id="tourForm" class="form">
+				<label for="discipline">Дисциплина:</label>
+				<select id="discipline" name="discipline"></select><br><br>
+
 				<label for="startTournamentDate">Дата начала турнира:</label>
 				<input type="date" id="startTournamentDate" name="startTournamentDate"><br><br>
 
@@ -63,9 +66,7 @@
 				<button type="button" onclick="submitAddTournamentForm()">Отправить</button>
 			</form>
 		</div>
-		<div class="contentmenu" style="display: none;">
 
-		</div>
 	</section>
 </body>
 </html>

@@ -10,9 +10,11 @@ namespace eSport_website.Db.Models
         public string? Name { get; set; }
         public int? Prize { get; set; }
         public int? Place { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public List<Match>? Matches { get; set; } // Матчи турнира
 
-        [JsonIgnore]
+        
         public int DisciplineId { get; set; } //Внеш ключ на дисциплину
         [JsonIgnore]
         public Discipline? Discipline { get; set; } // Навигационное свойство

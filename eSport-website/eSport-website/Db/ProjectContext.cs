@@ -11,6 +11,7 @@ namespace eSport_website
 
         public ProjectContext(DbContextOptions<ProjectContext> options):base(options)
         {;
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
