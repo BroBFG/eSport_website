@@ -66,6 +66,32 @@ function generateHTMLtable(place, tournament, startdate, enddate, prize) {
     table_mini.appendChild(tableE);
 }
 
+
+function generateHTMLnews(title, text) {
+    const news = document.getElementById("news");
+
+    const onepart = document.createElement("li");
+    onepart.style = "margin: auto;"
+    news.appendChild(onepart);
+
+    const block = document.createElement("div");
+    block.className = "newsblock";
+    onepart.appendChild(block);
+
+    const titlea = document.createElement("div");
+    titlea.className = "newsblocktitle";
+    titlea.textContent = title;
+    block.appendChild(titlea);
+
+
+    const texta = document.createElement("div");
+    texta.className = "newsblockphoto";
+    texta.textContent = text;
+    block.appendChild(texta);
+
+
+}
+
 function getCurrentTime() {
     const time = document.getElementById("time");
     
@@ -74,8 +100,11 @@ function getCurrentTime() {
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const seconds = now.getSeconds().toString().padStart(2, '0');
+    const day = now.getDate().toString();
+    const month = now.getMonth().toString();
+    const year = now.getFullYear().toString();
 
-    return `${hours}:${minutes}:${seconds}`;
+    return `${hours}:${minutes}:${seconds} ${day}:${month}:${year}`;
 }
 
 
@@ -98,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (request.status >= 200 && request.status < 400) {
             const data = JSON.parse(request.responseText);
             data.forEach(match => {
+                
                 const date = match.date;
                 const nameTournament = match.nameTournament;
                 const enemy = match.enemy;
@@ -142,6 +172,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
     request2.send();
 
+    const url3 = "/api/News/3"; // пример URL для GET запроса
+    const request3 = new XMLHttpRequest();
+
+    request3.open("GET", url3, true);
+
+    request3.onload = function () {
+        if (request3.status >= 200 && request3.status < 400) {
+            const data = JSON.parse(request3.responseText);
+            data.forEach(match => {
+                console.log(match);
+                generateHTMLnews(match.title, match.text);
+            });
+        } else {
+            console.error("Произошла ошибка при выполнении запроса");
+        }
+    };
+
+    request3.onerror = function () {
+        console.error("Произошла ошибка при выполнении запроса");
+    };
+
+    request3.send();
 
 });
 const swiper = new Swiper('.mySwiper', {

@@ -154,26 +154,33 @@ a {
 	margin-right: 100px;
 }
 
-.newsblock{
+.newsblock {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	width:500px;
-	height:500px;
+	width: 500px;
+	height: 500px;
 	border: solid;
+	background-color: #008354;
 }
 
-.newsblockphoto{
+.newsblockphoto {
 	width: 400px;
 	height: 300px;
-	border: solid;
 	margin: 40px;
+	color: white;
 }
 
 .newsblocktitle{
+	display:flex;
+	justify-content:center;
+	margin: 20px;
 	width: 400px;
 	height: 50px;
-	border: solid;
+	color: white;
+	font-size:16px;
+	font-weight: 500;
+	border-bottom: solid 1px;
 }
 	
 .swiper-button-prev, .swiper-button-next{

@@ -3,6 +3,7 @@ const buttonAddMatch = document.getElementById("buttonAddMatch");
 const buttonAddTournament = document.getElementById("buttonAddTournament");
 const buttonChangeTournament = document.getElementById("buttonChangeTournament");
 const buttonChangeUser = document.getElementById("buttonChangeUser");
+const buttonAddNews = document.getElementById("buttonAddNews")
 //Формы
 const mainmenu = document.getElementById("mainmenu");
 const addMatchMenu = document.getElementById("addMatchMenu");
@@ -11,6 +12,7 @@ const changeTourForm = document.getElementById("changeTourForm");
 const buttonAddTournamentForm = document.getElementById("buttonAddTournamentForm");
 const buttonChangeTournamentForm = document.getElementById("buttonChangeTournamentForm");
 const changeUser = document.getElementById("changeUser");
+const addNews = document.getElementById("addNews");
 
 document.addEventListener("DOMContentLoaded", function () {
     const token = sessionStorage.getItem("accessToken");
@@ -52,6 +54,7 @@ buttonAddMatch.addEventListener("click", function () {
 
     request.send();
 
+    addNews.style.display = "none";
     changeUser.style.display = "none";
     mainmenu.style.display = "none";
     addTournamentMenu.style.display = "none";
@@ -92,7 +95,7 @@ buttonAddTournament.addEventListener("click", function () {
     request.send();
 
 
-
+    addNews.style.display = "none";
     changeUser.style.display = "none";
     mainmenu.style.display = "none";
     addMatchMenu.style.display = "none";
@@ -179,6 +182,7 @@ buttonChangeTournament.addEventListener("click", function () {
 
     request2.send();
 
+    addNews.style.display = "none";
     changeUser.style.display = "none";
     mainmenu.style.display = "none";
     addMatchMenu.style.display = "none";
@@ -287,6 +291,7 @@ async function submitChangeTournamentForm() {
                 alert("Успешно!");
             })
             .catch(error => {
+                alert("Ошибка");
                 console.error('Error:', error);
             });
         const form = document.getElementById("tourForm");
@@ -360,6 +365,7 @@ function submitAddMatchForm() {
             alert("Успешно!");
         })
         .catch(error => {
+            alert("Ошибка");
             console.error('Error:', error);
         });
 
@@ -378,60 +384,135 @@ function submitAddTournamentForm() {
         alert("Некорректный ввод данных");
     }
     else {
-        //Контракт
-        const data = {
-            startDate: startTournament,
-            endDate: endTournament,
-            name: name,
-            place: place,
-            prize: prize,
-            disciplineId: discipline
-        };
+        if (place === '' && prize !== '') {
+            //Контракт
+            const data = {
+                startDate: startTournament,
+                endDate: endTournament,
+                name: name,
+                prize: prize,
+                disciplineId: discipline
+            };
 
-        //Получение токена
-        const token = sessionStorage.getItem("accessToken");
-        console.log(token);
-        fetch(url, {
-            method: "POST",
-            headers: {
-                'Content-Type': "application/json",
-                "Authorization": "Bearer " + token
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    if (response.status === 401) {
-                        alert("Неверный/истекший токен");
-                        window.location.href = "/login";
+            //Получение токена
+            const token = sessionStorage.getItem("accessToken");
+            console.log(token);
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 401) {
+                            alert("Неверный/истекший токен");
+                            window.location.href = "/login";
+                        }
+                        else throw new Error('Запрос вернул не ok');
                     }
-                    else throw new Error('Запрос вернул не ok');
-                }
-                return response.json();
+                    return response.json();
+                })
+                .then(data => {
+                    alert("Успешно!");
+                })
+                .catch(error => {
+                    alert("Ошибка");
+                    console.error('Error:', error);
+                });
+        }
+        if (prize === '' && place !== '') {
+            //Контракт
+            const data = {
+                startDate: startTournament,
+                endDate: endTournament,
+                name: name,
+                place: place,
+                disciplineId: discipline
+            };
+
+            //Получение токена
+            const token = sessionStorage.getItem("accessToken");
+            console.log(token);
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify(data)
             })
-            .then(data => {
-                alert("Успешно!");
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 401) {
+                            alert("Неверный/истекший токен");
+                            window.location.href = "/login";
+                        }
+                        else throw new Error('Запрос вернул не ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert("Успешно!");
+                })
+                .catch(error => {
+                    alert("Ошибка");
+                    console.error('Error:', error);
+                });
+        }
+        if (place === '' && prize === '') {
+            //Контракт
+            const data = {
+                startDate: startTournament,
+                endDate: endTournament,
+                name: name,
+                disciplineId: discipline
+            };
+
+            //Получение токена
+            const token = sessionStorage.getItem("accessToken");
+            console.log(token);
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify(data)
             })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 401) {
+                            alert("Неверный/истекший токен");
+                            window.location.href = "/login";
+                        }
+                        else throw new Error('Запрос вернул не ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert("Успешно!");
+                })
+                .catch(error => {
+                    alert("Ошибка");
+                    console.error('Error:', error);
+                });
+        }
     }
     
 }
 
 buttonChangeUser.addEventListener("click", function () {
-
+    addNews.style.display = "none";
     changeUser.style.display = "block";
     mainmenu.style.display = "none";
     addTournamentMenu.style.display = "none";
     addMatchMenu.style.display = "none";
 
 
-    const nickname = document.getElementById("nickname");
-    const password = document.getElementById("password");
-
-
-})
+});
 
 async function submitChangeUser() {
     const nickname = document.getElementById("nickname");
@@ -470,6 +551,15 @@ async function submitChangeUser() {
             alert("Успешно!");
         })
         .catch(error => {
+            alert("Ошибка");
             console.error('Error:', error);
         });
-}
+};
+buttonAddNews.addEventListener("click", function () {
+
+    addNews.style.display = "block";
+    changeUser.style.display = "none";
+    mainmenu.style.display = "none";
+    addTournamentMenu.style.display = "none";
+    addMatchMenu.style.display = "none";
+});

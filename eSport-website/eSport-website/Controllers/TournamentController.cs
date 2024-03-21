@@ -31,9 +31,9 @@ namespace eSport_website.Controllers
         {
             logger.LogInformation("visited Get id api/Tournament at {0}", DateTime.Now);
             if(id <= db.Tournaments.Count())
-                return db.Tournaments.AsNoTracking().OrderByDescending(p => p.StartDate).Take(id);
+                return db.Tournaments.AsNoTracking().Where(p=> DateTime.Compare(p.EndDate, DateTime.Now) < 0).OrderByDescending(p => p.StartDate).Take(id);
             else
-                return db.Tournaments.AsNoTracking().OrderByDescending(p => p.StartDate).Take(db.Tournaments.Count());
+                return db.Tournaments.AsNoTracking().Where(p => DateTime.Compare(p.EndDate, DateTime.Now) < 0).OrderByDescending(p => p.StartDate).Take(db.Tournaments.Count());
         }
 
         [Authorize]
