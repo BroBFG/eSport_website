@@ -500,6 +500,47 @@ function submitAddTournamentForm() {
                     console.error('Error:', error);
                 });
         }
+
+        if (place !== '' && prize !== '') {
+            //Контракт
+            const data = {
+                startDate: startTournament,
+                endDate: endTournament,
+                name: name,
+                prize: prize,
+                place: place,
+                disciplineId: discipline
+            };
+
+            //Получение токена
+            const token = sessionStorage.getItem("accessToken");
+            console.log(token);
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 401) {
+                            alert("Неверный/истекший токен");
+                            window.location.href = "/login";
+                        }
+                        else throw new Error('Запрос вернул не ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert("Успешно!");
+                })
+                .catch(error => {
+                    alert("Ошибка");
+                    console.error('Error:', error);
+                });
+        }
     }
     
 }
