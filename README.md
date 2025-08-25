@@ -1,6 +1,6 @@
 # eSport Website
 
-This project was created as a 3-day study project.
+This project was created as a 4-day study project.
 
 ## Description
 
